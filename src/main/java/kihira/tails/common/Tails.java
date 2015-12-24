@@ -18,6 +18,7 @@ import kihira.tails.client.render.FoxtatoRender;
 import kihira.tails.client.render.PlayerRenderHelper;
 import kihira.tails.client.render.RenderPart;
 import kihira.tails.proxy.CommonProxy;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,6 +41,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Mod(modid = Tails.MOD_ID, name = "Tails", version = "@VERSION@", dependencies = "after:foxlib")
@@ -76,6 +78,11 @@ public class Tails {
 
             RenderPart.registerRenderHelper(EntityPlayer.class, new PlayerRenderHelper());
             RenderPart.registerRenderHelper(FakeEntity.class, new FakeEntityRenderHelper());
+        }
+
+        ModelLoader modelLoader = new ModelLoader();
+        for (ModelData modelData : modelLoader.loadModels(modelLoader.scanForModels(Paths.get(Minecraft.getMinecraft().mcDataDir.getAbsolutePath(), "mods", "tails")))) {
+            System.out.println(modelData);
         }
     }
 
