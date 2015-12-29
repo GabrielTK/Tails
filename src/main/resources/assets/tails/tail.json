@@ -1,0 +1,41 @@
+{
+  "types": [{
+    "name": "Single Tail",
+    "models": [{
+      "modelName": "FluffyTail",
+      "position": [0, 0, 0],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }],
+    "animations": [{
+      "name": "Idle",
+      "variables": {
+        "nameOfVariable": "variableValueAsFloat"
+      },
+      "modelParts": {
+        "tailBase": ["formulaForXAngle", "formulaForYAngle", "formulaForZAngle"],
+        "tail1": ["RAD(20) + ABS(ZANGLEOFFSET / 2) ", "((-YANGLEOFFSET / 2) + COS(TIMESTEP) / 8) * YANGLEMULT", "-ZANGLEOFFSET / 8"],
+        "tail2": {
+          "animName": "standard",
+          "param1": 1
+        },
+        "tail3": ["formulaForXAngle", "formulaForYAngle", "formulaForZAngle"],
+        "tail4": ["formulaForXAngle", "formulaForYAngle", "formulaForZAngle"],
+        "tail5": ["formulaForXAngle", "formulaForYAngle", "formulaForZAngle"]
+      }
+    }]
+  }, {
+    "name": "Twin Tail",
+    "models": [{
+      "modelName": "FluffyTail",
+      "position": [0, 0, 0],
+      "rotation": [25, 0, 0],
+      "scale": [1, 1, 1]
+    }, {
+      "modelName": "FluffyTail",
+      "position": [0, 0, 0],
+      "rotation": [-25, 0, 0],
+      "scale": [1, 1, 1]
+    }]
+  }]
+}

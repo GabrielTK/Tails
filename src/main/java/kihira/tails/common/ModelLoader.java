@@ -5,8 +5,6 @@ import kihira.tails.client.model.ModelPart;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +21,6 @@ import java.util.zip.ZipFile;
 
 public class ModelLoader {
 
-    private static final Logger logger = LogManager.getLogger("Tails|Model Loader");
     private final Gson gson = new GsonBuilder().registerTypeAdapter(ModelData.class, new ModelDataClientDeserializer()).create();
 
     public List<ZipFile> scanForModels(Path folder) {
@@ -32,7 +29,7 @@ public class ModelLoader {
             return files;
         }
         try {
-            // Can be replaced with walk when moving to 1.8
+            // Can be replaced with walk when moving to Java 8
             Files.walkFileTree(folder, new ZipFileVisitor(files));
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +43,7 @@ public class ModelLoader {
         for (ZipFile file : files) {
             ZipEntry modelFile = file.getEntry("model.json");
             if (modelFile == null) {
-                logger.error(String.format("Failed to load model file %s as it is missing model.json file", file.getName()));
+                Tails.logger.error(String.format("Failed to load model file %s as it is missing model.json file", file.getName()));
                 continue;
             }
 
