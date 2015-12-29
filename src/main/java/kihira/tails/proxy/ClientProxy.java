@@ -14,7 +14,6 @@ import kihira.tails.common.PartsData;
 import kihira.tails.common.Tails;
 import kihira.tails.common.network.*;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -69,7 +68,6 @@ public class ClientProxy extends CommonProxy {
     public void registerHandlers() {
         ClientEventHandler eventHandler = new ClientEventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
-        FMLCommonHandler.instance().bus().register(eventHandler);
 
         //super.registerHandlers();
     }

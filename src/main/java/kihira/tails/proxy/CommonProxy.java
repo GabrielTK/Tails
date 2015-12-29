@@ -13,6 +13,7 @@ import kihira.tails.common.PartsData;
 import kihira.tails.common.ServerEventHandler;
 import kihira.tails.common.Tails;
 import kihira.tails.common.network.*;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -40,7 +41,7 @@ public class CommonProxy {
     }
 
     public void registerHandlers() {
-        FMLCommonHandler.instance().bus().register(new ServerEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
     }
 
     public void addPartsData(UUID uuid, PartsData partsData) {
