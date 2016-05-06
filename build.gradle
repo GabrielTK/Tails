@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 project.ext {
     massive = "1"
     major = "5"
-    minor = "1"
+    minor = "2"
     mcVersion = "1.8.9"
     forgeVersion = "11.15.1.1855"
     foxlibDevVersion = "1.7.10-0.6.0.develop.22"
