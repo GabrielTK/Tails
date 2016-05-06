@@ -7,6 +7,7 @@ import kihira.tails.common.Tails;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,9 +32,14 @@ public class LayerPart implements LayerRenderer<AbstractClientPlayer> {
         if (Tails.proxy.hasPartsData(uuid)) {
             PartsData partsData = Tails.proxy.getPartsData(uuid);
             if (partsData.hasPartInfo(partType) && partsData.getPartInfo(partType).hasPart) {
+
+                GlStateManager.pushMatrix();
+                if (partType == PartsData.PartType.EARS && entity.isSneaking()) GlStateManager.translate(0f, 0.2F, 0f);
                 modelRenderer.postRender(0.0625F);
+
                 PartInfo tailInfo = partsData.getPartInfo(partType);
                 PartRegistry.getRenderPart(tailInfo.partType, tailInfo.typeid).render(entity, tailInfo, 0, 0, 0, partialTicks);
+                GlStateManager.popMatrix();
             }
         }
     }

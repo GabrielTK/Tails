@@ -38,7 +38,6 @@ public class ClientProxy extends CommonProxy {
     public void addPartsData(UUID uuid, PartsData partsData) {
         if (hasPartsData(uuid)) {
             this.partsData.get(uuid).clearTextures();
-            System.out.println("Clearing textures for " + uuid);
         }
 
         super.addPartsData(uuid, partsData);

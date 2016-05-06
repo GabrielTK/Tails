@@ -32,7 +32,8 @@ public class PlayerRenderHelper implements IRenderHelper {
             GL11.glScalef(0.9F, 0.9F, 0.9F);
         }
         else {
-            GL11.glTranslatef(0F, 0.65F, 0.1F);
+            if (entity.isSneaking()) GL11.glTranslatef(0f, 0.82f, 0f);
+            else GL11.glTranslatef(0F, 0.65F, 0.1F);
             GL11.glScalef(0.8F, 0.8F, 0.8F);
         }
     }
