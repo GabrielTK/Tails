@@ -43,16 +43,20 @@ public abstract class Panel<T extends GuiBase> extends GuiBaseScreen {
     }
 
     //All this stuff is to make them public
+    @Override
     public void keyTyped(char key, int keycode) {}
 
+    @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
+    @Override
     public void mouseReleased(int mouseX, int mouseY, int mouseButton) {
         super.mouseReleased(mouseX, mouseY, mouseButton);
     }
 
+    @Override
     public void mouseClickMove(int mouseX, int mouseY, int mouseButton, long pressTime) {
         super.mouseClickMove(mouseX, mouseY, mouseButton, pressTime);
     }
@@ -64,5 +68,6 @@ public abstract class Panel<T extends GuiBase> extends GuiBaseScreen {
      * Does not call super as we never want to call super from a panel for this method
      * @throws IOException
      */
+    @Override
     public void handleMouseInput() throws IOException {}
 }
