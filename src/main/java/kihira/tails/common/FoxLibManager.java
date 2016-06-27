@@ -35,16 +35,16 @@ import java.util.regex.Pattern;
 @IFMLLoadingPlugin.MCVersion(value = FoxLibManager.MC_VERSION)
 public class FoxLibManager implements IFMLCallHook, IFMLLoadingPlugin {
 
-    public static final String foxlibVersion = "@FOXLIBVERSION@";
-    public static final String foxlibReqVersion = "[0.8.0,)";
-    public static final String foxlibFileName = "FoxLib-"+foxlibVersion+".jar";
-    public static final String foxlibDownloadLink = "http://addons-origin.cursecdn.com/files/2263/633/FoxLib-1.8-0.8.1.jar";
-    public static final String foxlibDownloadFallback = "http://minecraft.curseforge.com/mc-mods/223291-foxlib/files";
+    private static final String foxlibVersion = "@FOXLIBVERSION@";
+    private static final String foxlibReqVersion = "[0.10.0,)";
+    private static final String foxlibFileName = "FoxLib-"+foxlibVersion+".jar";
+    private static final String foxlibDownloadLink = "http://addons-origin.cursecdn.com/files/2307/728/FoxLib-1.9.4-0.10.0.jar"; // todo use own cdn
+    private static final String foxlibDownloadFallback = "http://minecraft.curseforge.com/mc-mods/223291-kihira.foxlib/files";
     public static final Logger logger = LogManager.getLogger("FoxLib Manager");
-    public static final String MC_VERSION = "1.8";
-    public static final Pattern pattern = Pattern.compile("(\\w+)[-][\\d\\.]+.*?([\\d\\.]{5,})[\\w]*.*?\\.jar", Pattern.CASE_INSENSITIVE);
+    static final String MC_VERSION = "@MCVERSION@";
+    private static final Pattern pattern = Pattern.compile("(\\w+)[-][\\d\\.]+.*?([\\d\\.]{5,})[\\w]*.*?\\.jar", Pattern.CASE_INSENSITIVE);
 
-    int totalSize;
+    private int totalSize;
 
     @Override
     public String[] getASMTransformerClass() {
@@ -112,7 +112,7 @@ public class FoxLibManager implements IFMLCallHook, IFMLLoadingPlugin {
         }
         //We have one, check it is the correct version
         else {
-            if (!VersionParser.parseRange(foxlibReqVersion).containsVersion(new DefaultArtifactVersion("1.7.10-" + foxLibs.firstKey().toString()))) {
+            if (!VersionParser.parseRange(foxlibReqVersion).containsVersion(new DefaultArtifactVersion(FoxLibManager.MC_VERSION + "-" + foxLibs.firstKey().toString()))) {
                 if (!GraphicsEnvironment.isHeadless()) {
                     showDownloadOptionDialog("FoxLib is not the required version! Would you like to update it?");
                     checkFoxLib();
@@ -231,7 +231,7 @@ public class FoxLibManager implements IFMLCallHook, IFMLLoadingPlugin {
 
         private final ProgressMonitor update;
 
-        public DownloadCountingOutputStream(OutputStream out, ProgressMonitor update) {
+        DownloadCountingOutputStream(OutputStream out, ProgressMonitor update) {
             super(out);
             this.update = update;
         }

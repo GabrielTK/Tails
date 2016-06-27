@@ -13,10 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import kihira.tails.api.IRenderHelper;
 import kihira.tails.client.FakeEntity;
-import kihira.tails.client.render.FakeEntityRenderHelper;
-import kihira.tails.client.render.FoxtatoRender;
-import kihira.tails.client.render.PlayerRenderHelper;
-import kihira.tails.client.render.RenderPart;
+import kihira.tails.client.render.*;
 import kihira.tails.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -44,7 +41,7 @@ import org.lwjgl.opengl.GL11;
 import java.nio.file.Paths;
 import java.util.Map;
 
-@Mod(modid = Tails.MOD_ID, name = "Tails", version = "@VERSION@", dependencies = "after:foxlib")
+@Mod(modid = Tails.MOD_ID, name = "Tails", version = "@VERSION@", dependencies = "after:kihira.foxlib")
 public class Tails {
 
     public static final String MOD_ID = "Tails";
@@ -112,11 +109,13 @@ public class Tails {
         else {
             logger.debug("Valid Botania not found, skipping Foxtato renderer");
         }
+
+        proxy.registerRenderers();
     }
 
     @SubscribeEvent
     public void onConfigChange(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.modID.equals(Tails.MOD_ID)) {
+        if (event.getModID().equals(Tails.MOD_ID)) {
             loadConfig();
         }
     }
@@ -159,6 +158,15 @@ public class Tails {
                 prop.set("");
 
                 //Force save
+                setLocalPartsData(localPartsData);
+            }
+
+            //Load default if none exists
+            if (localPartsData == null) {
+                localPartsData = new PartsData();
+                for (PartsData.PartType partType : PartsData.PartType.values()) {
+                    localPartsData.setPartInfo(partType, new PartInfo(false, 0, 0, 0, 0, 0, 0, null, partType));
+                }
                 setLocalPartsData(localPartsData);
             }
         } catch (JsonSyntaxException e) {

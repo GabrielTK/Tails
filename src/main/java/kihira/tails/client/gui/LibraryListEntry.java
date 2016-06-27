@@ -11,8 +11,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiListExtended;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -29,15 +30,15 @@ public class LibraryListEntry implements GuiListExtended.IGuiListEntry {
         if (data.remoteEntry) {
             Minecraft.getMinecraft().renderEngine.bindTexture(GuiIconButton.iconsTextures);
             GuiIconButton.Icons icon = GuiIconButton.Icons.SERVER;
-            GL11.glPushMatrix();
-            GL11.glTranslatef(x + listWidth - 16, y + slotHeight - 12, 0F);
-            GL11.glScalef(0.8F, 0.8F, 1F);
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(x + listWidth - 16, y + slotHeight - 12, 0F);
+            GlStateManager.scale(0.8F, 0.8F, 1F);
             GuiUtils.drawTexturedModalRect(0, 0, icon.u, icon.v, 16, 16, 10);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
 
         FontRenderer fontRendererObj = Minecraft.getMinecraft().fontRendererObj;
-        fontRendererObj.drawString((data.partsData.equals(Tails.localPartsData) ? EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC : "") + data.entryName, 5, y + 3, 0xFFFFFF);
+        fontRendererObj.drawString((data.partsData.equals(Tails.localPartsData) ? TextFormatting.GREEN + "" + TextFormatting.ITALIC : "") + data.entryName, 5, y + 3, 0xFFFFFF);
 
         fontRendererObj.setUnicodeFlag(true);
         for (PartsData.PartType type : PartsData.PartType.values()) {
