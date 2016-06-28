@@ -10,6 +10,7 @@ package kihira.tails.common;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
+import kihira.tails.client.MountPoint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,10 +24,13 @@ public class PartInfo implements Cloneable {
     @Expose public final int[] tints;
     @Expose public final int textureID;
     @Expose public PartsData.PartType partType; //Not final to preserve compat
+    @Expose public final float[] pos;
+    @Expose public final float[] rot;
+    @Expose public final MountPoint mountPoint;
 	private ResourceLocation texture;
     public boolean needsTextureCompile = true;
 	
-	public PartInfo(boolean hasPart, int type, int subtype, int textureID, int[] tints, PartsData.PartType partType, ResourceLocation texture) {
+	public PartInfo(boolean hasPart, int type, int subtype, int textureID, int[] tints, PartsData.PartType partType, ResourceLocation texture, float[] pos, float[] rot, MountPoint mountPoint) {
 		this.hasPart = hasPart;
 		this.typeid = type;
 		this.subid = subtype;
@@ -34,10 +38,13 @@ public class PartInfo implements Cloneable {
         this.tints = tints;
         this.partType = partType;
         this.texture = texture;
+        this.pos = pos;
+        this.rot = rot;
+        this.mountPoint = mountPoint;
 	}
 
-    public PartInfo(boolean hasPart, int type, int subtype, int textureID, int tint1, int tint2, int tint3, ResourceLocation texture, PartsData.PartType partType) {
-        this(hasPart, type, subtype, textureID, new int[] {tint1, tint2, tint3}, partType, texture);
+    public PartInfo(boolean hasPart, int type, int subtype, int textureID, int tint1, int tint2, int tint3, ResourceLocation texture, PartsData.PartType partType, MountPoint mountPoint) {
+        this(hasPart, type, subtype, textureID, new int[] {tint1, tint2, tint3}, partType, texture, new float[]{0, 0, 0}, new float[]{0, 0, 0}, mountPoint);
     }
 
     public ResourceLocation getTexture() {
@@ -58,7 +65,6 @@ public class PartInfo implements Cloneable {
         this.texture = texture;
     }
 
-    @SuppressWarnings("RedundantIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,13 +73,15 @@ public class PartInfo implements Cloneable {
         PartInfo partInfo = (PartInfo) o;
 
         if (hasPart != partInfo.hasPart) return false;
+        if (typeid != partInfo.typeid) return false;
         if (subid != partInfo.subid) return false;
         if (textureID != partInfo.textureID) return false;
-        if (typeid != partInfo.typeid) return false;
-        if (partType != partInfo.partType) return false;
         if (!Arrays.equals(tints, partInfo.tints)) return false;
+        if (partType != partInfo.partType) return false;
+        if (!Arrays.equals(pos, partInfo.pos)) return false;
+        if (!Arrays.equals(rot, partInfo.rot)) return false;
+        return mountPoint == partInfo.mountPoint;
 
-        return true;
     }
 
     @Override
@@ -84,6 +92,9 @@ public class PartInfo implements Cloneable {
         result = 31 * result + Arrays.hashCode(tints);
         result = 31 * result + textureID;
         result = 31 * result + partType.hashCode();
+        result = 31 * result + Arrays.hashCode(pos);
+        result = 31 * result + Arrays.hashCode(rot);
+        result = 31 * result + mountPoint.hashCode();
         return result;
     }
 
@@ -96,7 +107,11 @@ public class PartInfo implements Cloneable {
                 ", tints=" + Arrays.toString(tints) +
                 ", textureID=" + textureID +
                 ", partType=" + partType +
+                ", pos=" + Arrays.toString(pos) +
+                ", rot=" + Arrays.toString(rot) +
+                ", mountPoint=" + mountPoint +
                 ", texture=" + texture +
+                ", needsTextureCompile=" + needsTextureCompile +
                 '}';
     }
 

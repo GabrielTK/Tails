@@ -10,6 +10,7 @@ package kihira.tails.common;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
+import kihira.tails.client.MountPoint;
 
 import java.util.Arrays;
 
@@ -72,8 +73,18 @@ public class PartsData {
 
     //NOTE: We rely on the order of this, don't re-arrange, only append!
     public enum PartType {
-        TAIL,
-        EARS,
-        WINGS
+        TAIL(MountPoint.CHEST),
+        EARS(MountPoint.HEAD),
+        WINGS(MountPoint.CHEST);
+
+        private final MountPoint mountPoint;
+
+        PartType(MountPoint mountPoint) {
+            this.mountPoint = mountPoint;
+        }
+
+        public MountPoint getDefaultMount() {
+            return mountPoint;
+        }
     }
 }

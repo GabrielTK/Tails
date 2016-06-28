@@ -13,7 +13,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import kihira.tails.api.IRenderHelper;
 import kihira.tails.client.FakeEntity;
-import kihira.tails.client.render.*;
+import kihira.tails.client.render.FakeEntityRenderHelper;
+import kihira.tails.client.render.FoxtatoRender;
+import kihira.tails.client.render.PlayerRenderHelper;
+import kihira.tails.client.render.RenderPart;
 import kihira.tails.proxy.CommonProxy;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -158,7 +161,7 @@ public class Tails {
             if (localPartsData == null) {
                 localPartsData = new PartsData();
                 for (PartsData.PartType partType : PartsData.PartType.values()) {
-                    localPartsData.setPartInfo(partType, new PartInfo(false, 0, 0, 0, 0, 0, 0, null, partType));
+                    localPartsData.setPartInfo(partType, new PartInfo(false, 0, 0, 0, 0, 0, 0, null, partType, partType.getDefaultMount()));
                 }
                 setLocalPartsData(localPartsData);
             }

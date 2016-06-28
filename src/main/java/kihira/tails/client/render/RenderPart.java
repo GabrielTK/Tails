@@ -8,16 +8,16 @@
 
 package kihira.tails.client.render;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import kihira.tails.api.IRenderHelper;
 import kihira.tails.client.model.ModelPartBase;
 import kihira.tails.client.texture.TextureHelper;
 import kihira.tails.common.PartInfo;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 
@@ -48,18 +48,27 @@ public class RenderPart {
             info.needsTextureCompile = false;
         }
 
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
+
+        // Adjust based on mount point/pos/rot
+        GlStateManager.translate(info.mountPoint.getXOffset(), info.mountPoint.getYOffset(), info.mountPoint.getZOffset());
+        GlStateManager.translate(info.pos[0], info.pos[1], info.pos[2]);
+        GlStateManager.rotate(info.rot[0], 1, 0, 0);
+        GlStateManager.rotate(info.rot[1], 0, 1, 0);
+        GlStateManager.rotate(info.rot[2], 0, 0, 1);
 
         IRenderHelper helper;
         //Support for Galacticraft as it adds its own EntityPlayer
+        // todo climb up super heirarchy until find matching render helper? Standard entity rendering works the same way. yell at blu if confused
         if (entity instanceof EntityPlayer) helper = getRenderHelper(EntityPlayer.class);
         else helper = getRenderHelper(entity.getClass());
         if (helper != null) {
             helper.onPreRenderTail(entity, this, info, x, y, z);
         }
 
+
         this.doRender(entity, info, partialTicks);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     protected void doRender(EntityLivingBase entity, PartInfo info, float partialTicks) {

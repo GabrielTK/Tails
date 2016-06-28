@@ -31,7 +31,7 @@ public abstract class ModelPartBase extends ModelBase {
     public abstract void render(EntityLivingBase theEntity, int subtype, float partialTicks);
 
     /**
-     * Sets the rotation on a model where the provided params are in radians
+     * Sets the rot on a model where the provided params are in radians
      * @param model The model
      * @param x The x angle
      * @param y The y angle
@@ -44,7 +44,7 @@ public abstract class ModelPartBase extends ModelBase {
     }
 
     /**
-     * Sets the rotation on a model where the provided params are in degrees
+     * Sets the rot on a model where the provided params are in degrees
      * @param model The model
      * @param x The x angle
      * @param y The y angle

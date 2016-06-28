@@ -1,6 +1,7 @@
 package kihira.tails.client.render;
 
 import kihira.tails.client.FakeEntity;
+import kihira.tails.client.MountPoint;
 import kihira.tails.common.PartInfo;
 import kihira.tails.common.PartsData;
 import net.minecraft.world.World;
@@ -11,8 +12,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class FoxtatoRender {
 
     private FoxtatoFakeEntity fakeEntity;
-    private PartInfo tailPartInfo = new PartInfo(true, 0, 0, 0, new int[]{-5480951, -6594259, -5197647}, PartsData.PartType.TAIL, null);
-    private PartInfo earPartInfo = new PartInfo(true, 0, 0, 0, new int[]{-5480951, 0xFF000000, -5197647}, PartsData.PartType.EARS, null);
+    private PartInfo tailPartInfo = new PartInfo(true, 0, 0, 0, new int[]{-5480951, -6594259, -5197647}, PartsData.PartType.TAIL, null, new float[]{0, 0, 0}, new float[]{0, 0, 0}, MountPoint.CHEST);
+    private PartInfo earPartInfo = new PartInfo(true, 0, 0, 0, new int[]{-5480951, 0xFF000000, -5197647}, PartsData.PartType.EARS, null, new float[]{0, 0, 0}, new float[]{0, 0, 0}, MountPoint.CHEST);
 
     @SubscribeEvent
     public void onWorldUnload(WorldEvent.Unload e) {

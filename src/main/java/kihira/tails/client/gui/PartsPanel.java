@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,12 +60,12 @@ public class PartsPanel extends Panel<GuiEditor> implements IListCallback<PartsP
         //Part List
         List<PartEntry> partList = new ArrayList<PartEntry>();
         PartsData.PartType partType = parent.getPartType();
-        partList.add(new PartEntry(new PartInfo(false, 0, 0, 0, 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, null, partType))); //No tail
+        partList.add(new PartEntry(new PartInfo(false, 0, 0, 0, 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, null, partType, partType.getDefaultMount()))); //No tail
         //Generate tail preview textures and add to list
         List<RenderPart> parts = PartRegistry.getParts(partType);
         for (int type = 0; type < parts.size(); type++) {
             for (int subType = 0; subType <= parts.get(type).getAvailableSubTypes(); subType++) {
-                PartInfo partInfo = new PartInfo(true, type, subType, 0, 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, null, partType);
+                PartInfo partInfo = new PartInfo(true, type, subType, 0, 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, null, partType, partType.getDefaultMount());
                 partList.add(new PartEntry(partInfo));
             }
         }
@@ -107,7 +106,7 @@ public class PartsPanel extends Panel<GuiEditor> implements IListCallback<PartsP
         parent.textureID = 0;
         //Need to keep tints from original part
         PartInfo partInfo = new PartInfo(entry.partInfo.hasPart, entry.partInfo.typeid, entry.partInfo.subid, entry.partInfo.textureID,
-                parent.getEditingPartInfo().tints.clone(), entry.partInfo.partType, null);
+                parent.getEditingPartInfo().tints.clone(), entry.partInfo.partType, null, entry.partInfo.pos, new float[]{0, 0, 0}, entry.partInfo.mountPoint);
         parent.setPartsInfo(partInfo);
         return true;
     }
@@ -126,19 +125,19 @@ public class PartsPanel extends Panel<GuiEditor> implements IListCallback<PartsP
     }
 
     private void renderPart(int x, int y, int z, int scale, PartInfo partInfo) {
-        GL11.glPushMatrix();
-        GL11.glTranslatef(x, y, z);
-        GL11.glScalef(-scale, scale, 1F);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y , z);
+        GlStateManager.scale(-scale, scale, 1F);
 
         RenderHelper.enableStandardItemLighting();
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
         PartRegistry.getRenderPart(partInfo.partType, partInfo.typeid).render(fakeEntity, partInfo, 0, 0, 0, 0);
         RenderHelper.disableStandardItemLighting();
         OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableTexture2D();
         OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     public class PartEntry implements GuiListExtended.IGuiListEntry {

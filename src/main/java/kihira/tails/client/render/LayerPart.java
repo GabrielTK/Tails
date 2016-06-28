@@ -1,5 +1,6 @@
 package kihira.tails.client.render;
 
+import kihira.tails.client.MountPoint;
 import kihira.tails.client.PartRegistry;
 import kihira.tails.common.PartInfo;
 import kihira.tails.common.PartsData;
@@ -31,13 +32,13 @@ public class LayerPart implements LayerRenderer<AbstractClientPlayer> {
         if (Tails.proxy.hasPartsData(uuid)) {
             PartsData partsData = Tails.proxy.getPartsData(uuid);
             if (partsData.hasPartInfo(partType) && partsData.getPartInfo(partType).hasPart) {
-                PartInfo tailInfo = partsData.getPartInfo(partType);
+                PartInfo partInfo = partsData.getPartInfo(partType);
 
                 GlStateManager.pushMatrix();
-                if (partType == PartsData.PartType.EARS && entity.isSneaking()) GlStateManager.translate(0f, 0.2F, 0f);
+                if (partInfo.mountPoint == MountPoint.HEAD && entity.isSneaking()) GlStateManager.translate(0f, 0.2F, 0f);
                 modelRenderer.postRender(0.0625F);
 
-                PartRegistry.getRenderPart(tailInfo.partType, tailInfo.typeid).render(entity, tailInfo, 0, 0, 0, partialTicks);
+                PartRegistry.getRenderPart(partInfo.partType, partInfo.typeid).render(entity, partInfo, 0, 0, 0, partialTicks);
                 GlStateManager.popMatrix();
             }
         }

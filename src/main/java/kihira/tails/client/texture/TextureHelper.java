@@ -88,7 +88,7 @@ public class TextureHelper {
                     tailInfo = buildPartInfoFromSkin(partType, image, player.getUniqueID());
                 }
                 else {
-                    tailInfo = new PartInfo(false, 0, 0, 0, 0, 0, 0, null, partType);
+                    tailInfo = new PartInfo(false, 0, 0, 0, 0, 0, 0, null, partType, partType.getDefaultMount());
                 }
                 partsData.setPartInfo(partType, tailInfo);
             }
@@ -155,7 +155,7 @@ public class TextureHelper {
 		
 		ResourceLocation tailTexture = generateTexture(uuid, partType, typeid, subtype, textureid, new int[] {tint1, tint2, tint3});
 		
-		return new PartInfo(true, typeid, subtype, 0, tint1, tint2, tint3, tailTexture, partType);
+		return new PartInfo(true, typeid, subtype, 0, tint1, tint2, tint3, tailTexture, partType, partType.getDefaultMount());
 	}
 
     /**
