@@ -34,6 +34,7 @@ public class GuiEditor extends GuiBase {
     public LibraryPanel libraryPanel;
     public LibraryInfoPanel libraryInfoPanel;
     LibraryImportPanel libraryImportPanel;
+    private TransformPanel transformPanel;
 
     public GuiEditor() {
         super(4);
@@ -71,7 +72,8 @@ public class GuiEditor extends GuiBase {
             getLayer(1).add(partsPanel = new PartsPanel(this, 0, 0, previewWindowEdgeOffset, height - 43));
             getLayer(1).add(libraryPanel = new LibraryPanel(this, 0, 0, previewWindowEdgeOffset, height));
             getLayer(1).add(texturePanel = new TexturePanel(this, 0, height - 43, previewWindowEdgeOffset, 43));
-            getLayer(1).add(tintPanel = new TintPanel(this, previewWindowRight, 0, width - previewWindowRight, height));
+            getLayer(1).add(tintPanel = new TintPanel(this, previewWindowRight, 0, width - previewWindowRight, height - 150));
+            getLayer(1).add(transformPanel = new TransformPanel(this, previewWindowRight, height - 150, width - previewWindowRight, 150));
             getLayer(1).add(libraryImportPanel = new LibraryImportPanel(this, previewWindowRight, height - 60, width - previewWindowRight, 60));
             getLayer(1).add(libraryInfoPanel = new LibraryInfoPanel(this, previewWindowRight, 0, width - previewWindowRight, height - 60));
             getLayer(1).add(controlsPanel = new ControlsPanel(this, previewWindowEdgeOffset, previewWindowBottom, previewWindowRight - previewWindowEdgeOffset, height - previewWindowBottom));
@@ -89,6 +91,7 @@ public class GuiEditor extends GuiBase {
             texturePanel.resize(0, height - 43, previewWindowEdgeOffset, 43);
             libraryImportPanel.resize(previewWindowRight, height - 60, width - previewWindowRight, 60);
             controlsPanel.resize(previewWindowEdgeOffset, previewWindowBottom, previewWindowRight - previewWindowEdgeOffset, height - previewWindowBottom);
+            // todo add transform panel to resize
         }
         super.initGui();
     }

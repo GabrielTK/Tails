@@ -86,10 +86,10 @@ public class LibraryImportPanel extends Panel<GuiEditor> {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawGradientRect(0, 0, width, height, 0xDE000000, 0xDE000000);
         inputField.drawTextBox();
 
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

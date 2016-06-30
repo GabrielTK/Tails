@@ -50,13 +50,6 @@ public class RenderPart {
 
         GlStateManager.pushMatrix();
 
-        // Adjust based on mount point/pos/rot
-        GlStateManager.translate(info.mountPoint.getXOffset(), info.mountPoint.getYOffset(), info.mountPoint.getZOffset());
-        GlStateManager.translate(info.pos[0], info.pos[1], info.pos[2]);
-        GlStateManager.rotate(info.rot[0], 1, 0, 0);
-        GlStateManager.rotate(info.rot[1], 0, 1, 0);
-        GlStateManager.rotate(info.rot[2], 0, 0, 1);
-
         IRenderHelper helper;
         //Support for Galacticraft as it adds its own EntityPlayer
         // todo climb up super heirarchy until find matching render helper? Standard entity rendering works the same way. yell at blu if confused
@@ -66,6 +59,12 @@ public class RenderPart {
             helper.onPreRenderTail(entity, this, info, x, y, z);
         }
 
+        // Adjust based on mount point/pos/rot
+        GlStateManager.translate(info.mountPoint.getXOffset(), info.mountPoint.getYOffset(), info.mountPoint.getZOffset());
+        GlStateManager.translate(info.pos[0], info.pos[1], info.pos[2]);
+        GlStateManager.rotate(info.rot[0], 1, 0, 0);
+        GlStateManager.rotate(info.rot[1], 0, 1, 0);
+        GlStateManager.rotate(info.rot[2], 0, 0, 1);
 
         this.doRender(entity, info, partialTicks);
         GlStateManager.popMatrix();
