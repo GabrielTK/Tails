@@ -45,16 +45,19 @@ public class PartsPanel extends Panel<GuiEditor> implements IListCallback<PartsP
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         //zLevel = -100;
         drawGradientRect(0, 0, width, height, 0xCC000000, 0xCC000000);
         zLevel = 0;
         GlStateManager.color(1, 1, 1, 1);
         //Tails list
-        partList.drawScreen(mouseX, mouseY, p_73863_3_);
+        partList.drawScreen(mouseX, mouseY, partialTicks);
 
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
-    }
+        super.drawScreen(mouseX, mouseY, partialTicks);
+    }/**
+ * Created by ${USER} on ${DATE}.
+ */
+
 
     void initPartList() {
         //Part List

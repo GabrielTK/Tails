@@ -39,12 +39,12 @@ public class LibraryPanel extends Panel<GuiEditor> implements IListCallback<Libr
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         zLevel = -100;
         drawGradientRect(0, 0, width, height, 0xCC000000, 0xCC000000);
 
         searchField.drawTextBox();
-        list.drawScreen(mouseX, mouseY, p_73863_3_);
+        list.drawScreen(mouseX, mouseY, partialTicks);
 
         zLevel = 0;
         Minecraft.getMinecraft().renderEngine.bindTexture(GuiIconButton.iconsTextures);
@@ -55,7 +55,7 @@ public class LibraryPanel extends Panel<GuiEditor> implements IListCallback<Libr
         drawTexturedModalRect(0, 0, 160, 0, 16, 16);
         GlStateManager.popMatrix();
 
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override

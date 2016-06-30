@@ -33,8 +33,8 @@ public class ConfirmationDialog<T extends GuiBase & IDialogCallback> extends Dia
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
 
         for (int i = 0; i < messageList.size(); i++) {
             drawCenteredString(fontRendererObj, messageList.get(i), width / 2, 17 + (i * 9), 0xFFFFFFFF);

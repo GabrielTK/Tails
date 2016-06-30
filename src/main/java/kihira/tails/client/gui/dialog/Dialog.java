@@ -32,7 +32,7 @@ public class Dialog<T extends GuiBase & IDialogCallback> extends Panel<T> {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawGradientRect(0, 0, width, height, 0xFF808080, 0xFF808080);
         drawGradientRect(1, 12, width - 1, height - 1, 0xFF000000, 0xFF000000);
 
@@ -40,7 +40,7 @@ public class Dialog<T extends GuiBase & IDialogCallback> extends Panel<T> {
             drawString(fontRendererObj, title, 2, 2, 0xFFFFFFFF);
         }
 
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override

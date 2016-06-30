@@ -28,7 +28,7 @@ public class TexturePanel extends Panel<GuiEditor> {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         PartInfo partInfo = parent.getEditingPartInfo();
         RenderPart renderPart = PartRegistry.getRenderPart(parent.getPartType(), partInfo.typeid);
 
@@ -51,7 +51,7 @@ public class TexturePanel extends Panel<GuiEditor> {
             GL11.glColor4f(1F, 1F, 1F, 1F);
             GL11.glPopMatrix();
         }
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override

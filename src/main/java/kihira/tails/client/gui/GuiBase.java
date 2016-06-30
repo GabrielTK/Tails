@@ -42,21 +42,21 @@ public abstract class GuiBase extends GuiBaseScreen {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         for (ArrayList<Panel> layer : layers) {
             for (Panel panel : layer) {
                 if (panel.enabled) {
                     GL11.glPushMatrix();
                     GL11.glTranslatef(panel.left, panel.top, 0);
                     GL11.glColor4f(1, 1, 1, 1);
-                    panel.drawScreen(mouseX - panel.left, mouseY - panel.top, p_73863_3_);
+                    panel.drawScreen(mouseX - panel.left, mouseY - panel.top, partialTicks);
                     GL11.glDisable(GL11.GL_LIGHTING);
                     GL11.glPopMatrix();
                 }
             }
         }
         GL11.glColor4f(1, 1, 1, 1);
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override

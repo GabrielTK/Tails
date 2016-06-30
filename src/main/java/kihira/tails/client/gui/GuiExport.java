@@ -75,14 +75,14 @@ class GuiExport extends GuiBaseScreen {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float p_73863_3_) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
 
         this.drawCenteredString(this.fontRendererObj, I18n.format("gui.export.title"), this.width / 2, 25, 0xFFFFFF);
         this.fontRendererObj.drawSplitString(I18n.format("gui.export.information"), this.width / 6, 50, (int) (this.scaledRes.getScaledWidth() / 1.5F), 0xFFFFFF);
         if (!Strings.isNullOrEmpty(this.exportMessage)) this.fontRendererObj.drawSplitString(this.exportMessage, 160, this.height - 88, this.width - 160, 0xFFFFFF);
 
-        super.drawScreen(mouseX, mouseY, p_73863_3_);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
