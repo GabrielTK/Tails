@@ -31,8 +31,8 @@ public class TransformPanel extends Panel<GuiEditor> implements IControlCallback
         buttonList.add(rotZSlider = new GuiSlider(this, 2, 0, topOffset+spacing*2, 100, -180, 180, parent.originalPartInfo.rot[2], "Z Rotation"));
 
         xPosInput = new NumberInput(0, topOffset+spacing*4, -2, 2, 0.1f, this);
-        yPosInput = new NumberInput(0, topOffset+spacing*5, -2, 2, 0.1f);
-        zPosInput = new NumberInput(0, topOffset+spacing*6, -2, 2, 0.1f);
+        yPosInput = new NumberInput(0, topOffset+spacing*5, -2, 2, 0.1f, this);
+        zPosInput = new NumberInput(0, topOffset+spacing*6, -2, 2, 0.1f, this);
     }
 
     @Override

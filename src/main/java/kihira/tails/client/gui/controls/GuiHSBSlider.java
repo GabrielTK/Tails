@@ -1,15 +1,15 @@
 package kihira.tails.client.gui.controls;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraftforge.fml.client.config.GuiSlider;
-import net.minecraftforge.fml.client.config.GuiUtils;
 import kihira.foxlib.client.gui.ITooltip;
 import kihira.tails.common.Tails;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.config.GuiSlider;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -161,7 +161,7 @@ public class GuiHSBSlider extends GuiSlider implements ITooltip {
     }
 
     @Override
-    public List<String> getTooltip(int mouseX, int mouseY) {
+    public List<String> getTooltip(int mouseX, int mouseY, float mouseIdleTime) {
         return tooltips;
     }
 

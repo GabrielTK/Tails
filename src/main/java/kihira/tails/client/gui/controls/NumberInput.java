@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import kihira.foxlib.client.gui.GuiBaseScreen;
 import kihira.foxlib.client.gui.IControl;
 import kihira.foxlib.client.gui.IControlCallback;
+import kihira.foxlib.client.gui.ITooltip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiTextField;
@@ -13,14 +14,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-// todo limit to int?
+// todo tooltips only work for guibuttons
 @SideOnly(Side.CLIENT)
-public class NumberInput extends Gui implements IControl<Float> {
+public class NumberInput extends Gui implements IControl<Float>, ITooltip {
     private int xPos;
     private int yPos;
     private final int width = 55;
@@ -29,6 +31,8 @@ public class NumberInput extends Gui implements IControl<Float> {
     private final float min;
     private final float max;
     private final float increment;
+    private final float shiftMod = 10f;
+    private final float ctrlMod = 0.1f;
 
     private final int btnWidth = 10;
     private final int btnXPos;
@@ -44,12 +48,13 @@ public class NumberInput extends Gui implements IControl<Float> {
         Arrays.sort(validChars);
     }
 
-    public NumberInput(int x, int y, float min, float max, float increment) {
+    public NumberInput(int x, int y, float min, float max, float increment, @Nullable IControlCallback<IControl<Float>, Float> callback) {
         this.xPos = x;
         this.yPos = y;
         this.min = min;
         this.max = max;
         this.increment = increment;
+        this.callback = callback;
         df.setRoundingMode(RoundingMode.FLOOR);
 
         numInput = new GuiTextField(0, Minecraft.getMinecraft().fontRendererObj, xPos, yPos+1, width-btnWidth-2, height-2);
@@ -74,13 +79,8 @@ public class NumberInput extends Gui implements IControl<Float> {
         });
         setValue(0f);
 
-        this.btnXPos = xPos+numInput.width+1;
+        this.btnXPos = xPos+numInput.width+2;
         this.btnHeight = height/2;
-    }
-
-    public NumberInput(int x, int y, float min, float max, float increment, @Nullable IControlCallback callback) {
-        this(x, y, min, max, increment);
-        this.callback = callback;
     }
 
     public void draw(int mouseX, int mouseY) {
@@ -89,7 +89,7 @@ public class NumberInput extends Gui implements IControl<Float> {
         drawRect(btnXPos, yPos+btnHeight, btnXPos+btnWidth, yPos+height, 0xAAAAAAFF);
     }
 
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         boolean focused = numInput.isFocused();
         numInput.mouseClicked(mouseX, mouseY, mouseButton);
         // Only update num when input loses focus
@@ -100,8 +100,8 @@ public class NumberInput extends Gui implements IControl<Float> {
         }
 
         float inc = increment;
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) inc *= 10f;
-        else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) inc *= 0.1f;
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) inc *= shiftMod;
+        else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) inc *= ctrlMod;
 
         // Increase
         if (GuiBaseScreen.isMouseOver(mouseX, mouseY, xPos+numInput.width, yPos, btnWidth, btnHeight)) {
@@ -129,5 +129,14 @@ public class NumberInput extends Gui implements IControl<Float> {
     @Override
     public Float getValue() {
         return num;
+    }
+
+    @Override
+    public List<String> getTooltip(int mouseX, int mouseY, float mouseIdleTime) {
+        if (mouseIdleTime < 7f) return new ArrayList<>();
+        List<String> tooltip = new ArrayList<>();
+        tooltip.add(String.format("Click arrows to change by %s", increment));
+        tooltip.add(String.format("Hold SHIFT to change by %s, CTRL to change by %s", increment*10f, increment*0.1f));
+        return tooltip; //todo optimise
     }
 }
