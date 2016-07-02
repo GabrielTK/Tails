@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import kihira.tails.api.IRenderHelper;
 import kihira.tails.client.FakeEntity;
+import kihira.tails.client.MountPoint;
 import kihira.tails.client.render.FakeEntityRenderHelper;
 import kihira.tails.client.render.FoxtatoRender;
 import kihira.tails.client.render.PlayerRenderHelper;
@@ -137,6 +138,18 @@ public class Tails {
             //Load Player Data
             localPartsData = gson.fromJson(Tails.configuration.getString("Local Player Data",
                     Configuration.CATEGORY_GENERAL, "Local Players data. Delete to remove all customisation data. Do not try to edit manually", ""), PartsData.class);
+
+            // Fix missing data when loading from old version
+            if (localPartsData != null) {
+                for (PartsData.PartType type : PartsData.PartType.values()) {
+                    PartInfo info = localPartsData.getPartInfo(type);
+                    if (PartsData.hasPartInfo(info) && info.mountPoint == null) {
+                        info.mountPoint = type == PartsData.PartType.EARS ? MountPoint.HEAD : MountPoint.CHEST;
+                        info.pos = new float[]{0,0,0};
+                        info.rot = new float[]{0,0,0};
+                    }
+                }
+            }
 
             //Load old tail info if exists
             PartInfo tailInfo = null;

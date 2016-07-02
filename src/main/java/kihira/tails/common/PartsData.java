@@ -12,20 +12,20 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import kihira.tails.client.MountPoint;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class PartsData {
 
     @Expose private final PartInfo[] partInfos = new PartInfo[PartType.values().length];
 
-    public PartsData() {
-
-    }
+    public PartsData() {}
 
     public void setPartInfo(PartType partType, PartInfo partInfo) {
         partInfos[partType.ordinal()] = partInfo;
     }
 
+    @Nullable
     public PartInfo getPartInfo(PartType partType) {
         return partInfos[partType.ordinal()];
     }
@@ -33,6 +33,10 @@ public class PartsData {
     public boolean hasPartInfo(PartType partType) {
         PartInfo partInfo = partInfos[partType.ordinal()];
         return partInfo != null && partInfo.hasPart;
+    }
+
+    public static boolean hasPartInfo(PartInfo info) {
+        return info != null && info.hasPart;
     }
 
     public void clearTextures() {

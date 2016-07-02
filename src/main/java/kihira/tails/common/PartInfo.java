@@ -24,9 +24,9 @@ public class PartInfo implements Cloneable {
     @Expose public final int[] tints;
     @Expose public final int textureID;
     @Expose public PartsData.PartType partType; //Not final to preserve compat
-    @Expose public final float[] pos;
-    @Expose public final float[] rot;
-    @Expose public final MountPoint mountPoint;
+    @Expose public float[] pos = new float[]{0,0,0};
+    @Expose public float[] rot = new float[]{0,0,0};
+    @Expose public MountPoint mountPoint;
 	private ResourceLocation texture;
     public boolean needsTextureCompile = true;
 	
