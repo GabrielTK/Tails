@@ -106,7 +106,7 @@ public class ModelDevilTail extends ModelPartBase {
             this.tailTip.isHidden = true;
         }
 
-        this.tailBase.render(0.0625F);
+        this.tailBase.render(SCALE);
         this.tailTip.isHidden = false;
     }
 }

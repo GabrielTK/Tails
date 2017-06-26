@@ -119,6 +119,6 @@ public class ModelSharkTail extends ModelPartBase {
         setRotationRadians(tail3, 0.22759093446006054F - xAngleOffset, ((float) Math.cos(timestep - 4) / 5F) * yAngleMultiplier, 0F);
         setRotationRadians(finBase, 2.5953045977155678F, ((float) Math.cos(timestep - 10) / 5F) * yAngleMultiplier, 0F);
 
-        tailBase.render(0.0625F);
+        tailBase.render(SCALE);
     }
 }

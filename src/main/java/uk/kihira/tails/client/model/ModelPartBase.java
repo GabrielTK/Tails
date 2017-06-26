@@ -14,13 +14,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
+import uk.kihira.tails.client.gui.GuiBase;
+import uk.kihira.tails.client.texture.TripleTintTexture;
 
 /**
  * A base class that all tails extend
  */
 public abstract class ModelPartBase extends ModelBase {
 
-    public static final float SCALE = 0.0625F;
+    public static float SCALE = 0.0625F*1;
 
     /**
      * Renders the tail with the optional parts list provided

@@ -21,6 +21,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import org.lwjgl.opengl.GL12;
+import uk.kihira.tails.client.model.ModelPartBase;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -58,7 +59,8 @@ public class TintPanel extends Panel<GuiEditor> implements GuiHSBSlider.IHSBSlid
         }
 
         // Size Slider
-        sizeSlider = new GuiSlider(this, 6, 10, topOffset+35, width, 0.5f, 3.5f, 1.f);
+        sizeSlider = new GuiSlider(this, 6, 10, topOffset+35, width, 1.0f, 5.0f, 0.0625F);
+
         buttonList.add(sizeSlider);
 
         //Tint edit pane
@@ -286,6 +288,14 @@ public class TintPanel extends Panel<GuiEditor> implements GuiHSBSlider.IHSBSlid
 
     @Override
     public boolean onValueChange(GuiSlider slider, Float oldValue, Float newValue) {
+
+        if(slider == sizeSlider){
+            //System.out.print("Yup");
+            ModelPartBase.SCALE = 0.0625F*Math.round(newValue);
+        }else{
+            //System.out.print("Nop");
+        }
+
         return true;
     }
 }

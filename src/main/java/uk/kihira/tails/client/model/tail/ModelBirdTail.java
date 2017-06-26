@@ -103,6 +103,6 @@ public class ModelBirdTail extends ModelPartBase {
     @Override
     public void render(EntityLivingBase theEntity, int subtype, float partialTicks) {
         this.setRotationAngles(0, 0, 0, 0, 0, partialTicks, theEntity);
-        this.center.render(.0625f);
+        this.center.render(SCALE);
     }
 }

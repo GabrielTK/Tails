@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
+import uk.kihira.tails.client.model.ModelPartBase;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,7 +32,7 @@ public class TripleTintTexture extends AbstractTexture {
 	private final int tint3;
 	
 	private static final int MINBRIGHTNESS = 22;
-	
+
 	public TripleTintTexture(String namespace, String texturename, int tint1, int tint2, int tint3) {
 		this.namespace = namespace;
 		this.texturename = texturename; 
@@ -73,6 +74,7 @@ public class TripleTintTexture extends AbstractTexture {
                 
                 texture.setRGB(0, 0, w, h, pixeldata, 0, w);
                 TextureUtil.uploadTextureImage(this.getGlTextureId(), texture);
+
             }
         }
         catch (IOException ioexception)

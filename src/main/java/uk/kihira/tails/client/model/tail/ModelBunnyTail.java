@@ -21,7 +21,7 @@ public class ModelBunnyTail extends ModelPartBase {
 
         this.setRotationAngles(0, timestep, 1F, 1F, 0, 0, partialTicks, theEntity);
 
-        this.tailBase.render(0.0625F);
+        this.tailBase.render(SCALE);
     }
 
     private void setRotationAngles(int subtype, float timestep, float yOffset, float xOffset, float xAngle, float yAngle, float partialTicks, Entity entity) {

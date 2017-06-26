@@ -81,6 +81,6 @@ public class ModelRaccoonTail extends ModelPartBase {
     public void render(EntityLivingBase theEntity, int subtype, float partialTicks) {
         this.setRotationAngles(0, 0, 0, 0, 0, partialTicks, theEntity);
 
-        this.tailBase.render(0.0625F);
+        this.tailBase.render(SCALE);
     }
 }

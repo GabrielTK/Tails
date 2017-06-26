@@ -133,46 +133,46 @@ public class ModelFluffyTail extends ModelPartBase {
         if (subtype == 0) {
             this.setRotationAngles(0, timestep, 1F, 1F, 0, 0, partialTicks, theEntity);
             GlStateManager.rotate(-20F, 1F, 0F, 0F);
-            //this.tailBase.render(0.0625F);
-            this.tailBase.render(0.1F);
+            //this.tailBase.render(0.0625f);
+            this.tailBase.render(SCALE);
         }
         else if (subtype == 1) {
             this.setRotationAngles(1, timestep, 1F, 1F, 0F, (float) Math.toRadians(40F), partialTicks, theEntity);
             GlStateManager.rotate(-20F, 1F, 0F, 0F);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(1, timestep, 1.4F, 0F, 0F, (float) Math.toRadians(-40F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
         }
         else if (subtype == 2) {
             timestep = getAnimationTime(6500F, theEntity);
 
             this.setRotationAngles(2, timestep, -1.5F, 2.5F, 0F, 0, partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.3F, 1.6F, 0, (float) Math.toRadians(30F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.1F, 0.7F, 0, (float) Math.toRadians(-30F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.2F, 2.6F, (float) Math.toRadians(20F), (float) Math.toRadians(-15F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -0.9F, 1.1F, (float) Math.toRadians(20F), (float) Math.toRadians(15F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -0.8F, 2F, (float) Math.toRadians(20F), (float) Math.toRadians(45F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.25F, 0.6F, (float) Math.toRadians(20F), (float) Math.toRadians(-45F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.4F, 0.9F, (float) Math.toRadians(45F), (float) Math.toRadians(15F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
 
             this.setRotationAngles(2, timestep, -1.1F, 1.6F, (float) Math.toRadians(45F), (float) Math.toRadians(-15F), partialTicks, theEntity);
-            this.tailBase.render(0.0625F);
+            this.tailBase.render(SCALE);
         }
     }
 }
