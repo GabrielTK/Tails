@@ -134,7 +134,7 @@ public class ModelFluffyTail extends ModelPartBase {
             this.setRotationAngles(0, timestep, 1F, 1F, 0, 0, partialTicks, theEntity);
             GlStateManager.rotate(-20F, 1F, 0F, 0F);
             //this.tailBase.render(0.0625F);
-            this.tailBase.render(0.01F);
+            this.tailBase.render(0.1F);
         }
         else if (subtype == 1) {
             this.setRotationAngles(1, timestep, 1F, 1F, 0F, (float) Math.toRadians(40F), partialTicks, theEntity);
