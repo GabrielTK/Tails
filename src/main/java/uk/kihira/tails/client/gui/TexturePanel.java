@@ -1,11 +1,11 @@
 package uk.kihira.tails.client.gui;
 
-import uk.kihira.tails.client.PartRegistry;
-import uk.kihira.tails.client.render.RenderPart;
-import uk.kihira.tails.common.PartInfo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import uk.kihira.tails.client.PartRegistry;
+import uk.kihira.tails.client.render.RenderPart;
+import uk.kihira.tails.common.PartInfo;
 
 public class TexturePanel extends Panel<GuiEditor> {
     private final int texSelectX = 17;
